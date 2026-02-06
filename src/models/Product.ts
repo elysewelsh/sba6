@@ -7,13 +7,21 @@
 import { calculateDiscount } from "../utils/discountCalculator.js";
 import { calculateTax } from "../utils/taxCalculator.js";
 
-export abstract class Product {
+export interface Iproduct {
+    id: number,
+    title: string,
+    category: string,
+    price: number,
+    discountPercentage: number
+};
+
+export class Product implements Iproduct {
     constructor(
-        public readonly id: number,
-        public readonly title: string,
+        public id: number,
+        public title: string,
         private price: number,
-        private discount: number,
-        private category: string) {}
+        public discountPercentage: number,
+        public category: string) {}
 
     displayDetails(): string {
         return  `${this.title} costs $${this.price} and`
@@ -24,7 +32,7 @@ export abstract class Product {
     }
 
     public get workableDiscount(): number {
-        return this.discount;
+        return this.discountPercentage;
     }
 
     public get workableCategory(): string {
