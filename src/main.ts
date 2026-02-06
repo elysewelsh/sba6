@@ -21,15 +21,15 @@ import { handleRequest } from './services/apiService.js';
 const catalog: Product[] = [];
 
 handleRequest();
-const something = await handleRequest();
-    if (typeof something !== "undefined") {
-        for (let i: number = 0; i < something.length; i++) {
-            if (typeof something[i] !== "undefined") {
-                if (typeof something[i].id !== "undefined" && typeof something[i].title !== "undefined" &&
-                    typeof something[i].price !== "undefined" && typeof something[i]?.discountPercentage !== "undefined" &&
-                    typeof something[i].category !== "undefined") {
-                        const productInstance = new Product(something[i].id, something[i]?.title, something[i]?.price, 
-                            something[i].discountPercentage, something[i]?.category);
+const item = await handleRequest();
+    if (typeof item !== "undefined") {
+        for (let i: number = 0; i < item.length; i++) {
+            if (typeof item[i] !== "undefined") {
+                if (typeof item[i]!.id !== "undefined" && typeof item[i]!.title !== "undefined" &&
+                    typeof item[i]!.price !== "undefined" && typeof item[i]?.discountPercentage !== "undefined" &&
+                    typeof item[i]!.category !== "undefined") {
+                        const productInstance = new Product(item[i]!.id, item[i]!.title, item[i]!.price, 
+                            item[i]!.discountPercentage, item[i]!.category);
                         catalog.push(productInstance);
                     } else {
                         // throw error;
