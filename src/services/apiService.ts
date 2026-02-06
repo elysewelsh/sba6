@@ -3,18 +3,8 @@
 
 
 // INPUTS: Internet, Error
-// OUTPUTS: Product, Discount
+// OUTPUTS: Product
 import { Iproduct } from '../models/Product.js'
-
-// export interface Iresponse {
-//     id: number,
-//     title: string,
-//     category: string,
-//     price: number,
-//     discountPercentage: number
-// };
-
-
 
 export async function handleRequest() {
     try {
@@ -33,5 +23,3 @@ export async function handleRequest() {
         return undefined;
     }
 }
-
-// handleRequest()

@@ -19,12 +19,30 @@ export class Product implements Iproduct {
     constructor(
         public id: number,
         public title: string,
-        private price: number,
+        public price: number,
         public discountPercentage: number,
         public category: string) {}
 
-    displayDetails(): string {
-        return  `${this.title} costs $${this.price} and`
+    displayDetails(): void {
+        console.log(`${this.title} costs $${this.price}.`);
+        // console.log(`workable category: ${this.workableCategory}`);
+        // console.log(`workable discount: ${this.workableDiscount}`);
+        // console.log(`workable getpricewithtax: ${this.getPriceWithTax()}`);
+        // console.log(`workable getdiscountedprice: ${this.getDiscountedPrice()}`);
+        if (typeof this !== "undefined") {
+            if (typeof this.discountPercentage !== "undefined") {
+                if (this.discountPercentage > 0) {
+                    console.log(`This item is reduced by ${this.discountPercentage}% and now costs $${(this.discountedPrice).toFixed(2)}`)
+                } else {
+                    console.error("error4")
+                }
+            } else {
+                console.error("error5")
+            }
+        } else {
+            console.log("error6")
+        }
+        console.log(`The final price of ${this.title} with tax is $${(this.taxedAmount)?.toFixed(2)}.`);
     }
 
     public get workablePrice(): number {
@@ -44,7 +62,7 @@ export class Product implements Iproduct {
     }; 
 
     private getPriceWithTax(): number {
-        return this.workablePrice + calculateTax(this);
+        return this.discountedPrice + calculateTax(this);
     };
 
     public get discountedPrice(): number {

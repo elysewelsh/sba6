@@ -14,9 +14,9 @@ import { Product } from "../models/Product.js";
 export function calculateTax(product: Product): number {
   let taxAmount: number = 0;
   if (product.workableCategory === "groceries") {
-    taxAmount = product.discountedPrice * .03
+    taxAmount = ((product.discountedPrice) * .03);
   } else {
-    taxAmount = product.discountedPrice * .045
+    taxAmount = ((product.discountedPrice) * .0475);
   }
     return taxAmount;
 }

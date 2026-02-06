@@ -10,8 +10,7 @@ import { Product } from "../models/Product.js"
 export function calculateDiscount(product: Product): number {
     let discountPrice: number = product.workablePrice;
     if (product.workableDiscount > 0) {
-        discountPrice = product.workablePrice * (product.workableDiscount/100);
-        return discountPrice;
-        }
+        discountPrice = (product.workablePrice * (product.workableDiscount/100));
+    };
     return discountPrice;
 }

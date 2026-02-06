@@ -45,5 +45,14 @@ const something = await handleRequest();
         console.log("error3");
     };
 // console.log(catalog);
-console.log("WELCOME TO ROSEBUD, A SIMS STORE");
+console.log(`.,;:'"':;,.,;:'"':;,.,;:'"':;,.,;:'"':;,.,;:'"':;,.,;:'"':;,.,;:'"':;,.`);
+console.log("----------------WELCOME TO ROSEBUD, A SIMS STORE-----------------------");
+console.log(`.,;:'"':;,.,;:'"':;,.,;:'"':;,.,;:'"':;,.,;:'"':;,.,;:'"':;,.,;:'"':;,.`);
+console.log("");
 console.log("Here is our product catalog:")
+console.log("_______________________________________________________________________");
+for (let i: number = 0; i < catalog.length; i++) {
+    catalog[i]!.displayDetails();
+    console.log("_______________________________________________________________________");
+    console.log("");
+}
