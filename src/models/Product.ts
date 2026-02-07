@@ -6,6 +6,7 @@
 
 import { calculateDiscount } from "../utils/discountCalculator.js";
 import { calculateTax } from "../utils/taxCalculator.js";
+import { DataError, handleError} from '../utils/errorHandler.js'
 
 export interface Iproduct {
     id: number,
@@ -24,26 +25,31 @@ export class Product implements Iproduct {
         public category: string) {}
 
     displayDetails(): void {
-        console.log(`${this.title} costs $${this.price}.`);
-        // console.log(`workable category: ${this.workableCategory}`);
-        // console.log(`workable discount: ${this.workableDiscount}`);
-        // console.log(`workable getpricewithtax: ${this.getPriceWithTax()}`);
-        // console.log(`workable getdiscountedprice: ${this.getDiscountedPrice()}`);
-        if (typeof this !== "undefined") {
-            if (typeof this.discountPercentage !== "undefined") {
-                if (this.discountPercentage > 0) {
-                    console.log(`This item is reduced by ${this.discountPercentage}% and now costs $${(this.discountedPrice).toFixed(2)}`)
+        try {
+            console.log(`${this.title} costs $${this.price}.`);
+            if (typeof this !== "undefined") {
+                if (typeof this.discountPercentage !== "undefined") {
+                    if (this.discountPercentage > 0) {
+                        console.log(`This item is reduced by ${this.discountPercentage}% and now costs $${(this.discountedPrice).toFixed(2)}`);
+                    } else {
+                        console.log("");
+                    }
                 } else {
-                    console.error("error4")
+                throw (new DataError('Product discount type is undefined'));
                 }
             } else {
-                console.error("error5")
+                throw (new DataError('Product type is undefined'));
             }
-        } else {
-            console.log("error6")
+            console.log(`The final price of ${this.title} with tax is $${(this.taxedAmount)?.toFixed(2)}.`);
         }
-        console.log(`The final price of ${this.title} with tax is $${(this.taxedAmount)?.toFixed(2)}.`);
-    }
+        catch(e) {
+            handleError(e as Error);
+        }
+        finally {
+            console.log("_______________________________________________________________________");
+            console.log("");
+        }
+    };
 
     public get workablePrice(): number {
         return this.price;
