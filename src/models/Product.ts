@@ -1,13 +1,11 @@
 // Define a Product class that includes the appropriate properties based on data provided in the API response.
 // Include methods displayDetails() and getPriceWithDiscount(), and implement them appropriately based on the provided data.
 
-// INPUTS: API, Discount
-// OUTPUTS: Discount, Main
-
 import { calculateDiscount } from "../utils/discountCalculator.js";
 import { calculateTax } from "../utils/taxCalculator.js";
 import { DataError, handleError} from '../utils/errorHandler.js'
 
+// shared between Product class and API results
 export interface Iproduct {
     id: number,
     title: string,
@@ -24,9 +22,12 @@ export class Product implements Iproduct {
         public discountPercentage: number,
         public category: string) {}
 
+// will be called in main.ts
     displayDetails(): void {
         try {
+// will format data into text for catalog output
             console.log(`${this.title} costs $${this.price}.`);
+// type guards
             if (typeof this !== "undefined") {
                 if (typeof this.discountPercentage !== "undefined") {
                     if (this.discountPercentage > 0) {
@@ -51,6 +52,7 @@ export class Product implements Iproduct {
         }
     };
 
+// public to be used outside of this class/module
     public get workablePrice(): number {
         return this.price;
     }
@@ -63,6 +65,7 @@ export class Product implements Iproduct {
         return `${this.category}`;
     }
 
+// private because only used within this class/module
     private getDiscountedPrice(): number {
         return this.workablePrice - calculateDiscount(this);
     }; 
@@ -71,6 +74,7 @@ export class Product implements Iproduct {
         return this.discountedPrice + calculateTax(this);
     };
 
+// public so functions can retrieve from this class/module
     public get discountedPrice(): number {
         return this.getDiscountedPrice();
     };

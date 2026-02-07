@@ -5,12 +5,11 @@
 // a discountPercentage field. Apply a default standard tax rate of 4.75% to each product; 
 // however, products with a category of “groceries” should only be taxed at 3%.
 
-// INPUTS: Product
-// OUTPUTS: Main
-
-
 import { Product } from "../models/Product.js";
 
+// price and category were private when this was written, but circumstances 
+// required they be changed to public. This function and the variables and functions
+// referenced from the Product class can still accomodate a private property
 export function calculateTax(product: Product): number {
   let taxAmount: number = 0;
   if (product.workableCategory === "groceries") {

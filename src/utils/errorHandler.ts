@@ -1,5 +1,6 @@
 // Implement a custom error class and functions to handle different types of errors gracefully.
 
+// needed for API call rejection/negative status
 export class APIError extends Error {
   constructor(message: string) {
     super(message);
@@ -7,6 +8,7 @@ export class APIError extends Error {
   }
 };
 
+// needed for type guards
 export class DataError extends Error {
   constructor(message: string) {
     super(message);
@@ -14,7 +16,7 @@ export class DataError extends Error {
   }
 };
 
-
+// input: error from other functions, output: formatted, informational error message in console
 export function handleError(error: Error) {
 console.log("____________________________________________________");
 console.log("_______________________ERROR________________________");
